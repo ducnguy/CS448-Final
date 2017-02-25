@@ -21,12 +21,12 @@ Though these are reasonable debugging tools, they require developing under the i
 
 #Tasks:
 - **week 1**
-- design Magma API for hooking up wires to be saved by registers at certain points in time
-- design Magma API for wrapping design for single step examination
-- implement UART
+  - design Magma API for hooking up wires to be saved by registers at certain points in time
+  - design Magma API for wrapping design for single step examination
+  - implement UART
 - **week 2-3**
-- implement Magma process for hooking up wires to be saved by registers at certain points in time
-- connect registers in previous point to be sent by UART to PC
+  - implement Magma process for hooking up wires to be saved by registers at certain points in time
+  - connect registers in previous point to be sent by UART to PC
 - **week 3-4**
-- implement Magma API for wrapping design for single step examination
-- allow PC input to control single stepping
+  - implement Magma API for wrapping design for single step examination
+  - allow PC input to control single stepping
