@@ -10,12 +10,11 @@ As we have seen with the example of the Toastboard [Hartmann et al.], ubiquitous
 #Previous Work: 
 
 This article http://www.newelectronics.co.uk/electronics-technology/debugging-methods-for-fpgas/18546/ provides a good summary of existing FPGA debugging methods.  Some notable points from the article are:
-  - Hardware debugging using the EPIC design editor: "EPIC is a design editor that displays the exact implementation of the 
-    design in hardware and which also can be used interactively to make smaller modifications to the design after synthesis. 
-    Typical modifications include changing selected I/O Standards, adding debugging probes or inverting signals."
+  - Hardware debugging using the ispLever EPIC design editor: "EPIC is a design editor that displays the exact implementation of the design in hardware and which also can be used interactively to make smaller modifications to the design after synthesis. Typical modifications include changing selected I/O Standards, adding debugging probes or inverting signals."
   - Hardware debugging using Lattice Reveal tool: "Lattice has implemented a tool called Reveal which is included in the 
     ispLEVER software environment. With Reveal no external logic analyser or free pins on the fpga are required. The software 
     in the system logic analyser captures signal activity and stores the information in internal RAM Blocks. The stored
     information is passed via the JTAG interface to the software analyser running on the PC. The trigger conditions can be
-    changed on the fly without changing the design."
-
+    changed on the fly without changing the design.
+    
+The drawback to using these tools is that 
