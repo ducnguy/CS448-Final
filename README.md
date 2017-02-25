@@ -1,9 +1,11 @@
 #MagDebug
 Team Members: Duc Nguyen
 
-#Goal: The goal of the project is to build a debugging framework on top of Magma.  The API will provide functions which "wrap" existing Magma hardware designs with circuits that will count clock cycles and store hardware states at certain points of execution (i.e. specific clock cycles).  A UART will be utilized for relaying debug info to the host machine.
+#Goal: 
+The goal of the project is to build a debugging framework on top of Magma.  The API will provide functions which "wrap" existing Magma hardware designs with circuits that will count clock cycles and store hardware states at certain points of execution (i.e. specific clock cycles).  A UART will be utilized for relaying debug info to the host machine.
 
-#Motivation: As we have seen with the example of the Toastboard [Hartmann et al.], ubiquitous examination of a system with immediate visualization allows users to diagnose problems based on a wealth of data instead of having to form a single hypothesis and plan before taking a measurement.  With the MagDebug system, users should be able to test a hypotheses without making major changes to their code or writing test prototypes.  For users (like myself) that are new to hardware/FPGA design, this will speed up the learning process, and help make the task of writing simple designs as easy and unintimidating as it should be.  For more experienced users, MagDebug will hopefully accomplish some use cases similar to the ones software debugging tools like GDB accomplish (being able to step through and examine execution by clock cycle, examining hardware state after N number of clock cycles).
+#Motivation: 
+As we have seen with the example of the Toastboard [Hartmann et al.], ubiquitous examination of a system with immediate visualization allows users to diagnose problems based on a wealth of data instead of having to form a single hypothesis and plan before taking a measurement.  With the MagDebug system, users should be able to test a hypotheses without making major changes to their code or writing test prototypes.  For users (like myself) that are new to hardware/FPGA design, this will speed up the learning process, and help make the task of writing simple designs as easy and unintimidating as it should be.  For more experienced users, MagDebug will hopefully accomplish some use cases similar to the ones software debugging tools like GDB accomplish (being able to step through and examine execution by clock cycle, examining hardware state after N number of clock cycles).
 
 #Previous Work: 
 
