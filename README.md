@@ -1,2 +1,3 @@
-# CS448-Final
-MagDebug
+# Title: MagDebug
+
+
