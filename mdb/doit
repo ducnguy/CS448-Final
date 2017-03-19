@@ -1,0 +1,9 @@
+export MANTLE=lattice
+export PYTHONPATH=~/Documents/Magma-Debug/magma/
+export MANTLE_TARGET=ice40
+sudo kextunload -b com.apple.driver.AppleUSBFTDI
+./bake clean
+./bake
+cd build
+make upload
+cd ..
