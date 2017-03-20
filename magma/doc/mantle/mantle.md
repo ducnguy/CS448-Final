@@ -129,7 +129,7 @@ For example, the type signatures of
 Mux(2,8) :: I0 : Array(8,In(Bit)), I1 : Array(8,In(Bit)), S : In(Bit) -> O : Array(8,Out(Bit))
 Mux(4,8) :: I0 : Array(8,In(Bit)), I1 : Array(8,In(Bit)), 
 I2 : Array(8,In(Bit)), I3 : Array(8,In(Bit)), S : In(Bit) -> O : Array(8,Out(Bit))
-``
+```
 
 
 ### Logic
