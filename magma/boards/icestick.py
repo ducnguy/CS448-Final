@@ -9,7 +9,6 @@ from parts.generic.led import LED
 from peripherals.timer import Timer
 
 class IceStick(Board):
-
     def __init__(self):
 
         super(IceStick, self).__init__("IceStick")
