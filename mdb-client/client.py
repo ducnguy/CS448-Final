@@ -20,17 +20,15 @@ def get_ftdi_device_list():
         dev_list.append("%s:%s:%s" % (vendor, product, serial))
     return dev_list
 
-print get_ftdi_device_list()
+with SerialDevice(mode='t') as dev:
+    dev.baudrate = 115200
 
-# with SerialDevice(mode='t') as dev:
-#     dev.baudrate = 115200
-#     print dev
-#     while (True):
-#         dev.dtr = 0
-#         time.sleep(.5)
-#         dev.dtr = 1
-#         time.sleep(.5)
-#         print 'cycle'
+    while (True):
+        dev.dtr = 0
+        time.sleep(.5)
+        dev.dtr = 1
+        time.sleep(.5)
+        print 'cycle'
 
 # import usb.core
 # import usb.util

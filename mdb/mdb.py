@@ -9,11 +9,17 @@ icestick = IceStick()
 icestick.Clock.on()
 icestick.TX.output().on()
 icestick.RTS.on()
+icestick.D1.on()
+icestick.D2.on()
 # icestick.CTS.output().on()
 icestick.DTR.on()
     
 
 main = icestick.main()
+
+def is_power2(num):
+    return num != 0 and ((num & (num - 1)) == 0)
+
 
 class Debugger:
     """
@@ -25,11 +31,11 @@ class Debugger:
         valid = 1
 
         # data to be sent
-        printf = Counter(int(math.log(len(init),2)), ce=True) # determines which byte in init to send
-        rom = ROM(int(math.log(len(init),2)), init, printf.O) # selects 8-bit arrays from the array of inits
+        numBytes = int(math.log(len(self.init),2))
+        printf = Counter(numBytes, ce=True) # determines which byte in init to send
+        rom = ROM(numBytes, self.init, printf.O) # selects 8-bit arrays from the array of inits
         data = array(1, rom.O[7], rom.O[6], rom.O[5], rom.O[4],
                      rom.O[3], rom.O[2], rom.O[1], rom.O[0], 0) # current byte split into bits
-
         # baud clock
         clock = CounterModM(103, 8, ce=True) # clock that couts at baudrate
         baud = clock.COUT
@@ -59,15 +65,18 @@ class Debugger:
         wire(shift, main.TX) # output to TX
 
         # Clock should run until reaches firstByte again.  Triggered by RTS
-        firstByte = Decode(0,3)(printf)
+
+        firstByte = Decode(0,numBytes)(printf)
         EOL = LUT2(I0&I1)(firstByte,done)
         rtsSwitch = DFF()
         rtsSwitch_A = LUT4( (I0|I1) & ~I2 | (I2 & ~I3)) (self.rtsCtrl, rtsSwitch.O, EOL, baud)
         wire(rtsSwitch_A, rtsSwitch.I)
         wire(rtsSwitch.O, clock.CE) 
+        wire(main.D1,main.RTS)
+        wire(main.D2,main.DTR)
         
 
-    def mdb_dtrrts_setup(self):
+    def __mdb_dtrrts_setup(self):
         # RTS SETUP
         rtsCtrl = DFF() # up for one clock cycle after rts upedge
         rtsBefore = DFF() # used to calculate rtsCtrl
@@ -84,41 +93,97 @@ class Debugger:
         wire(dtrCtrl.I, input)
         self.dtrCtrl = dtrCtrl
 
-
-    def is_power2(num):
-        return num != 0 and ((num & (num - 1)) == 0)
-
-
-    """
-        track() - adds circuit components to output tracked bits to UART
-    """
-    def track(self):
-        n = len(self.init)
-        if not is_power2(n):
-            logn = int(math.floor(math.log(n,2)))
-            desiredN = 2**(logn+1)
-            for x in range(desiredN):
-                init.append(array(*[0, 0, 0, 0, 0, 0, 0, 0]))
-
-        self.mdb_dtrrts_setup()
-        self.__mdb_uart()
-
     """
     writeNames() - dump names of bits to textfile
     """
-    def writeNames(self):
+    def __write_names(self):
+        target = open('names.txt', 'w')
+        for name in self.names:
+            target.write(name)
+            target.write('\n')
         pass
+
+    """
+    track() - takes either an array of bits, or a single bit as first argument,
+              and adds it to the list of bits to be tracked .
+    """
+    def track(self, toTrack, name):
+        #TODO: check name and toTrack type
+        if hasattr(toTrack, 'interface'):
+            toTrack = toTrack.interface.outputs()
+            
+        if isinstance(toTrack, Sequence):
+            for i in range(len(toTrack[0])): 
+                self.bits.append(toTrack[0][i])
+                self.names.append(name + "_" + str(i)) 
+        else:
+            self.bits.append(toTrack)
+            self.names.append(name)
+
+    def __pad_init(self):
+        n = len(self.init)
+
+        if n == 0:
+            for x in range(0):
+                self.init.append(array(*[0, 0, 0, 0, 0, 0, 0, 0]))
+
+        elif n == 1:
+            for x in range(1):
+                self.init.append(array(*[0, 0, 0, 0, 0, 0, 0, 0]))
+
+        elif not is_power2(n):
+            logn = int(math.floor(math.log(n,2)))
+            desiredN = 2**(logn+1)
+            for x in range(desiredN):
+                self.init.append(array(*[0, 0, 0, 0, 0, 0, 0, 0]))
+
+    def __populate_init(self):
+        print self.bits
+        i = 0
+        n = len(self.bits)
+        currArr = []
+        while i < n:
+            currArr.append(self.bits[i])
+            i += 1
+            if len(currArr) == 8:
+                self.init.insert(0,array(*currArr))
+                currArr = []
+
+        while len(currArr) < 8:
+            currArr.insert(0,0)
+
+        self.init.append(array(*currArr))
+        print "INIT: ", self.init
+
+    """
+        debug() - adds circuit components to output tracked bits to UART
+    """
+    def debug(self):
+        
+        self.__populate_init()
+        self.__pad_init()
+        self.__mdb_dtrrts_setup()
+        self.__mdb_uart()
+        self.__write_names()
+        wire(c.CE, self.dtrCtrl.O) #HACK
+
+    
 
     def __init__(self):
         self.init = []
         self.bits = []
         self.names = []
         self.rtsCtrl = None
-        self.dtsCtrl = None
+        self.dtrCtrl = None
 
 mdb = Debugger()
-c = Counter(8,ce=True)
-wire(c.CE, dtrCtrl.O)
-mdb.init = [c.O];
-
+c = Counter(8, ce=True)
+mdb.track(c, "TestCounter")
+mdb.track(c.O[0], "TestBit")
+mdb.debug()
 compile(sys.argv[1], main)
+
+
+
+
+
