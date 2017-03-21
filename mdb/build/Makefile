@@ -1,4 +1,4 @@
-NAME = test
+NAME = test2
 
 PCF = $(NAME).pcf
 

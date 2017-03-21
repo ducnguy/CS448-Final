@@ -21,7 +21,8 @@ mdb = Debugger(main)
 c = Counter(8, ce=True)
 mdb.track(c, "TestCounter")
 mdb.track(c.O[0], "TestBit")
+mdb.ce(c.CE, 1)
 
 mdb.debug()
-wire(c.CE, mdb.dtrCtrl.O) #HACK
 compile(sys.argv[1], main)
+

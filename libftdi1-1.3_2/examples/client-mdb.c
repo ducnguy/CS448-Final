@@ -18,6 +18,8 @@
 #define MAX_BITS_TRACKED 128
 #define MAX_NAME_LENGTH 12
 
+static int numBytesToRead;
+
 char *int2bin(int a, char *buffer, int buf_size) {
     buffer += (buf_size - 1);
 
@@ -90,7 +92,7 @@ void mdb_print_state(struct ftdi_context* ftdi, char** names, int numNames)
 {
     unsigned char buf[200];
     int bytesRead = mdb_read_state(ftdi, buf, 200);
-    while (bytesRead != 2) //TODO: READ THIS NUMBER FROM FILE.
+    while (bytesRead != numBytesToRead) //TODO: READ THIS NUMBER FROM FILE.
     {
         bytesRead = mdb_read_state(ftdi, buf, 200);
     }
@@ -227,6 +229,10 @@ int read_names(char** names)
 
     int numNames = 0;
     int l = 0;
+
+    read = getline(&line, &len, fp);
+    numBytesToRead = atoi(line);
+
     while ((read = getline(&line, &len, fp)) != -1) {
         names[numNames] = (char*)malloc(read);
         strcpy(names[numNames], line);
@@ -318,6 +324,24 @@ int main(int argc, char *argv[])
             {
                 char *name = &buff[2];
                 mdb_print_name(ftdi, names, numNames, name);
+            }
+        }
+        else if (strncmp(buff,"goto",4) == 0)
+        {
+            if (buff[4] == ' ' && isdigit(buff[5]))
+            {
+                int targetStep = atoi(buff+5);
+                int cycles = 0;
+                while (counter < targetStep)
+                {
+                    mdb_advance_state(ftdi);
+                    cycles++;
+                    counter++;
+                }
+                if (cycles != 0)
+                    printf("Advanced %d clock cycle(s). Clock cycles since start: %d\n\n", cycles, counter);
+                else
+                    printf("Cannot go to the past.\n\n");
             }
         }
     }

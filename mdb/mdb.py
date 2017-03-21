@@ -13,14 +13,13 @@ class Debugger:
         __mdb_uart() - Defines Magma code for UART which outputs state saved in init
     """
     def __mdb_uart(self):
-        if not self.init and len(self.init):
-            self.init = [array(*[0, 0, 0, 0, 0, 0, 0, 0])]*8
+        # self.init = [array(*[1, 0, 1, 0, 1, 0, 1, 0])]*4
         valid = 1
 
         # data to be sent
-        numBytes = int(math.log(len(self.init),2))
-        printf = Counter(numBytes, ce=True) # determines which byte in init to send
-        rom = ROM(numBytes, self.init, printf.O) # selects 8-bit arrays from the array of inits
+        log = int(math.log(len(self.init),2))
+        printf = Counter(log, ce=True) # determines which byte in init to send
+        rom = ROM(log, self.init, printf.O) # selects 8-bit arrays from the array of inits
         data = array(1, rom.O[7], rom.O[6], rom.O[5], rom.O[4],
                      rom.O[3], rom.O[2], rom.O[1], rom.O[0], 0) # current byte split into bits
         # baud clock
@@ -53,7 +52,7 @@ class Debugger:
 
         # Clock should run until reaches firstByte again.  Triggered by RTS
 
-        firstByte = Decode(0,numBytes)(printf)
+        firstByte = Decode(0,log)(printf)
         EOL = LUT2(I0&I1)(firstByte,done)
         rtsSwitch = DFF()
         rtsSwitch_A = LUT4( (I0|I1) & ~I2 | (I2 & ~I3)) (self.rtsCtrl, rtsSwitch.O, EOL, baud)
@@ -84,7 +83,10 @@ class Debugger:
     writeNames() - dump names of bits to textfile
     """
     def __write_names(self):
+        n = len(self.init)
         target = open('names.txt', 'w')
+        target.write(str(n))
+        target.write('\n')
         for name in self.names:
             target.write(name)
             target.write('\n')
@@ -98,7 +100,7 @@ class Debugger:
         #TODO: check name and toTrack type
         if hasattr(toTrack, 'interface'):
             toTrack = toTrack.interface.outputs()
-            
+        
         if isinstance(toTrack, Sequence):
             for i in range(len(toTrack[0])): 
                 self.bits.append(toTrack[0][i])
@@ -121,11 +123,10 @@ class Debugger:
         elif not is_power2(n):
             logn = int(math.floor(math.log(n,2)))
             desiredN = 2**(logn+1)
-            for x in range(desiredN):
+            for x in range(desiredN-n):
                 self.init.append(array(*[0, 0, 0, 0, 0, 0, 0, 0]))
 
     def __populate_init(self):
-        print self.bits
         i = 0
         n = len(self.bits)
         currArr = []
@@ -133,14 +134,24 @@ class Debugger:
             currArr.insert(0,self.bits[i])
             i += 1
             if len(currArr) == 8:
-                self.init.insert(0,array(*currArr))
+                self.init.append(array(*currArr))
                 currArr = []
 
         while len(currArr) < 8:
             currArr.insert(0,0)
 
         self.init.append(array(*currArr))
-        print "INIT: ", self.init
+
+    def __hookup_CEs(self):
+        for x in self.clockEnables:
+            port = x[0]
+            val = x[1]
+            resultCE = LUT2(I0 & I1)(self.dtrCtrl.O,val)
+            wire(port, resultCE)
+
+
+    def ce(self, port, userCE):
+        self.clockEnables.append((port,userCE))
 
     """
         debug() - adds circuit components to output tracked bits to UART
@@ -152,6 +163,7 @@ class Debugger:
         self.__mdb_dtrrts_setup()
         self.__mdb_uart()
         self.__write_names()
+        self.__hookup_CEs()
     
 
     def __init__(self, main):
@@ -161,6 +173,7 @@ class Debugger:
         self.rtsCtrl = None
         self.dtrCtrl = None
         self.main = main
+        self.clockEnables = []
 
 
 
