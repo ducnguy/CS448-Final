@@ -1,4 +1,4 @@
-NAME = mdb
+NAME = test
 
 PCF = $(NAME).pcf
 

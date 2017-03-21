@@ -48,10 +48,10 @@ RM = /usr/local/Cellar/cmake/3.7.2/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/duc/Documents/libftdi1-1.3_2
+CMAKE_SOURCE_DIR = /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/duc/Documents/libftdi1-1.3_2/debug
+CMAKE_BINARY_DIR = /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -66,17 +66,6 @@ install/local: preinstall
 install/local/fast: install/local
 
 .PHONY : install/local/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/local/Cellar/cmake/3.7.2/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-
-.PHONY : install/strip/fast
 
 # Special rule for the target install
 install: preinstall
@@ -103,7 +92,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && /usr/local/Cellar/cmake/3.7.2/bin/cpack --config ./CPackSourceConfig.cmake /Users/duc/Documents/libftdi1-1.3_2/debug/CPackSourceConfig.cmake
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && /usr/local/Cellar/cmake/3.7.2/bin/cpack --config ./CPackSourceConfig.cmake /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -136,7 +125,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && /usr/local/Cellar/cmake/3.7.2/bin/cpack --config ./CPackConfig.cmake
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && /usr/local/Cellar/cmake/3.7.2/bin/cpack --config ./CPackConfig.cmake
 .PHONY : package
 
 # Special rule for the target package
@@ -146,14 +135,14 @@ package/fast: package
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(CMAKE_COMMAND) -E cmake_progress_start /Users/duc/Documents/libftdi1-1.3_2/debug/CMakeFiles /Users/duc/Documents/libftdi1-1.3_2/debug/ftdi_eeprom/CMakeFiles/progress.marks
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 ftdi_eeprom/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/duc/Documents/libftdi1-1.3_2/debug/CMakeFiles 0
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(CMAKE_COMMAND) -E cmake_progress_start /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug/CMakeFiles /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug/ftdi_eeprom/CMakeFiles/progress.marks
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 ftdi_eeprom/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 ftdi_eeprom/clean
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 ftdi_eeprom/clean
 .PHONY : clean
 
 # The main clean target
@@ -163,22 +152,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 ftdi_eeprom/preinstall
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 ftdi_eeprom/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 ftdi_eeprom/preinstall
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 ftdi_eeprom/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/rule:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/rule
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/rule
 .PHONY : ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/rule
 
 # Convenience name for target.
@@ -188,7 +177,7 @@ ftdi_eeprom: ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/rule
 
 # fast build rule for target.
 ftdi_eeprom/fast:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/build.make ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/build
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/build.make ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/build
 .PHONY : ftdi_eeprom/fast
 
 main.o: main.c.o
@@ -197,7 +186,7 @@ main.o: main.c.o
 
 # target to build an object file
 main.c.o:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/build.make ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/main.c.o
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/build.make ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/main.c.o
 .PHONY : main.c.o
 
 main.i: main.c.i
@@ -206,7 +195,7 @@ main.i: main.c.i
 
 # target to preprocess a source file
 main.c.i:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/build.make ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/main.c.i
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/build.make ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/main.c.i
 .PHONY : main.c.i
 
 main.s: main.c.s
@@ -215,7 +204,7 @@ main.s: main.c.s
 
 # target to generate assembly for a file
 main.c.s:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/build.make ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/main.c.s
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/build.make ftdi_eeprom/CMakeFiles/ftdi_eeprom.dir/main.c.s
 .PHONY : main.c.s
 
 # Help Target
@@ -225,7 +214,6 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/local"
-	@echo "... install/strip"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... package_source"
@@ -247,6 +235,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

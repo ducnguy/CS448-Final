@@ -5,21 +5,8 @@ import math
 from rom import ROM
 from boards.icestick import IceStick
 
-icestick = IceStick()
-icestick.Clock.on()
-icestick.TX.output().on()
-icestick.RTS.on()
-icestick.D1.on()
-icestick.D2.on()
-# icestick.CTS.output().on()
-icestick.DTR.on()
-    
-
-main = icestick.main()
-
 def is_power2(num):
     return num != 0 and ((num & (num - 1)) == 0)
-
 
 class Debugger:
     """
@@ -62,7 +49,7 @@ class Debugger:
         wire(baud, shift.CE)
         ready = LUT2(~I0 & I1)(run, baud)
         wire(ready, printf.CE) 
-        wire(shift, main.TX) # output to TX
+        wire(shift, self.main.TX) # output to TX
 
         # Clock should run until reaches firstByte again.  Triggered by RTS
 
@@ -72,24 +59,24 @@ class Debugger:
         rtsSwitch_A = LUT4( (I0|I1) & ~I2 | (I2 & ~I3)) (self.rtsCtrl, rtsSwitch.O, EOL, baud)
         wire(rtsSwitch_A, rtsSwitch.I)
         wire(rtsSwitch.O, clock.CE) 
-        wire(main.D1,main.RTS)
-        wire(main.D2,main.DTR)
+        wire(self.main.D1, self.main.RTS)
+        wire(self.main.D2, self.main.DTR)
         
 
     def __mdb_dtrrts_setup(self):
         # RTS SETUP
         rtsCtrl = DFF() # up for one clock cycle after rts upedge
         rtsBefore = DFF() # used to calculate rtsCtrl
-        input = LUT3(I0&~I1&~I2)(main.RTS, rtsCtrl.O, rtsBefore) #calculation of rtsCtrl
-        wire(rtsBefore.I, main.RTS)
+        input = LUT3(I0&~I1&~I2)(self.main.RTS, rtsCtrl.O, rtsBefore) #calculation of rtsCtrl
+        wire(rtsBefore.I, self.main.RTS)
         wire(rtsCtrl.I, input)
         self.rtsCtrl = rtsCtrl
 
         # DTR SETUP
         dtrCtrl = DFF() # up for one clock cycle after dtr upedge
         dtrBefore = DFF() # used to calculate dtrCtrl
-        input = LUT3(I0&~I1&~I2)(main.DTR, dtrCtrl.O, dtrBefore) #calculation of dtrCtrl
-        wire(dtrBefore.I, main.DTR)
+        input = LUT3(I0&~I1&~I2)(self.main.DTR, dtrCtrl.O, dtrBefore) #calculation of dtrCtrl
+        wire(dtrBefore.I, self.main.DTR)
         wire(dtrCtrl.I, input)
         self.dtrCtrl = dtrCtrl
 
@@ -143,7 +130,7 @@ class Debugger:
         n = len(self.bits)
         currArr = []
         while i < n:
-            currArr.append(self.bits[i])
+            currArr.insert(0,self.bits[i])
             i += 1
             if len(currArr) == 8:
                 self.init.insert(0,array(*currArr))
@@ -165,23 +152,15 @@ class Debugger:
         self.__mdb_dtrrts_setup()
         self.__mdb_uart()
         self.__write_names()
-        wire(c.CE, self.dtrCtrl.O) #HACK
-
     
 
-    def __init__(self):
+    def __init__(self, main):
         self.init = []
         self.bits = []
         self.names = []
         self.rtsCtrl = None
         self.dtrCtrl = None
-
-mdb = Debugger()
-c = Counter(8, ce=True)
-mdb.track(c, "TestCounter")
-mdb.track(c.O[0], "TestBit")
-mdb.debug()
-compile(sys.argv[1], main)
+        self.main = main
 
 
 

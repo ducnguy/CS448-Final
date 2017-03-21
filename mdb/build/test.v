@@ -348,7 +348,7 @@ SB_DFF inst4 (.C(CLKIN), .D(inst6_O), .Q(inst4_Q));
 SB_DFF inst5 (.C(CLKIN), .D(DTR), .Q(inst5_Q));
 SB_LUT4 #(.LUT_INIT(16'h0202)) inst6 (.I0(DTR), .I1(inst4_Q), .I2(inst5_Q), .I3(1'b0), .O(inst6_O));
 Counter1CE inst7 (.O(inst7_O), .COUT(inst7_COUT), .CLK(CLKIN), .CE(inst19_O));
-Mux2x8 inst8 (.I0(inst0_O), .I1({inst0_O[0],1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}), .S(inst7_O[0]), .O(inst8_O));
+Mux2x8 inst8 (.I0({inst0_O[0],inst0_O[1],inst0_O[2],inst0_O[3],inst0_O[4],inst0_O[5],inst0_O[6],inst0_O[7]}), .I1({inst0_O[0],1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}), .S(inst7_O[0]), .O(inst8_O));
 CounterModM8CE inst9 (.O(inst9_O), .COUT(inst9_COUT), .CLK(CLKIN), .CE(inst22_Q));
 Counter5CER inst10 (.O(inst10_O), .COUT(inst10_COUT), .CLK(CLKIN), .CE(inst9_COUT), .RESET(inst16_O));
 SB_LUT4 #(.LUT_INIT(16'h0000)) inst11 (.I0(inst10_O[0]), .I1(inst10_O[1]), .I2(inst10_O[2]), .I3(inst10_O[3]), .O(inst11_O));

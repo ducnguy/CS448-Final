@@ -5,7 +5,7 @@ from fabricate import main, autoclean, run
 
 BUILD = 'build'
 
-tests = glob.glob('*.py')
+tests = glob.glob('test.py')
 
 def build():
     for test in tests:

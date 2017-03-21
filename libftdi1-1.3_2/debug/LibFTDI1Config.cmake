@@ -30,19 +30,19 @@
 #  LIBFTDI_PYTHON_MODULE_PATH - Path to the python module
 
 set ( LIBFTDI_FOUND 1 )
-set ( LIBFTDI_USE_FILE     "/usr/lib/cmake/libftdi1/UseLibFTDI1.cmake" )
+set ( LIBFTDI_USE_FILE     "/usr/local/lib/cmake/libftdi1/UseLibFTDI1.cmake" )
 
 set ( LIBFTDI_DEFINITIONS  "" )
-set ( LIBFTDI_INCLUDE_DIR  "/usr/include/libftdi1" )
-set ( LIBFTDI_INCLUDE_DIRS "/usr/include/libftdi1" )
+set ( LIBFTDI_INCLUDE_DIR  "/usr/local/include/libftdi1" )
+set ( LIBFTDI_INCLUDE_DIRS "/usr/local/include/libftdi1" )
 set ( LIBFTDI_LIBRARY      "ftdi1" )
 set ( LIBFTDI_LIBRARIES    "ftdi1;/usr/local/lib/libusb-1.0.dylib" )
 set ( LIBFTDI_STATIC_LIBRARY      "ftdi1.a" )
 set ( LIBFTDI_STATIC_LIBRARIES    "ftdi1.a;/usr/local/lib/libusb-1.0.dylib" )
 set ( LIBFTDIPP_LIBRARY    "" )
 set ( LIBFTDIPP_LIBRARIES  "" )
-set ( LIBFTDI_LIBRARY_DIRS "/usr/lib" )
-set ( LIBFTDI_ROOT_DIR     "/usr" )
+set ( LIBFTDI_LIBRARY_DIRS "/usr/local/lib" )
+set ( LIBFTDI_ROOT_DIR     "/usr/local" )
 
 set ( LIBFTDI_VERSION_STRING "1.3" )
 set ( LIBFTDI_VERSION_MAJOR  "1" )

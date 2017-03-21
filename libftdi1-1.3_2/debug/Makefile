@@ -48,10 +48,10 @@ RM = /usr/local/Cellar/cmake/3.7.2/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/duc/Documents/libftdi1-1.3_2
+CMAKE_SOURCE_DIR = /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/duc/Documents/libftdi1-1.3_2/debug
+CMAKE_BINARY_DIR = /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -66,17 +66,6 @@ install/local: preinstall
 install/local/fast: install/local
 
 .PHONY : install/local/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/local/Cellar/cmake/3.7.2/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-
-.PHONY : install/strip/fast
 
 # Special rule for the target install
 install: preinstall
@@ -103,7 +92,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	/usr/local/Cellar/cmake/3.7.2/bin/cpack --config ./CPackSourceConfig.cmake /Users/duc/Documents/libftdi1-1.3_2/debug/CPackSourceConfig.cmake
+	/usr/local/Cellar/cmake/3.7.2/bin/cpack --config ./CPackSourceConfig.cmake /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -146,9 +135,9 @@ package/fast: package
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/duc/Documents/libftdi1-1.3_2/debug/CMakeFiles /Users/duc/Documents/libftdi1-1.3_2/debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug/CMakeFiles /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/duc/Documents/libftdi1-1.3_2/debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -378,7 +367,6 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/local"
-	@echo "... install/strip"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... package_source"

@@ -48,10 +48,10 @@ RM = /usr/local/Cellar/cmake/3.7.2/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/duc/Documents/libftdi1-1.3_2
+CMAKE_SOURCE_DIR = /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/duc/Documents/libftdi1-1.3_2/debug
+CMAKE_BINARY_DIR = /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -67,21 +67,10 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/local/Cellar/cmake/3.7.2/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-
-.PHONY : install/strip/fast
-
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && /usr/local/Cellar/cmake/3.7.2/bin/cpack --config ./CPackConfig.cmake
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && /usr/local/Cellar/cmake/3.7.2/bin/cpack --config ./CPackConfig.cmake
 .PHONY : package
 
 # Special rule for the target package
@@ -125,7 +114,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && /usr/local/Cellar/cmake/3.7.2/bin/cpack --config ./CPackSourceConfig.cmake /Users/duc/Documents/libftdi1-1.3_2/debug/CPackSourceConfig.cmake
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && /usr/local/Cellar/cmake/3.7.2/bin/cpack --config ./CPackSourceConfig.cmake /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -146,14 +135,14 @@ install/local/fast: install/local
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(CMAKE_COMMAND) -E cmake_progress_start /Users/duc/Documents/libftdi1-1.3_2/debug/CMakeFiles /Users/duc/Documents/libftdi1-1.3_2/debug/examples/CMakeFiles/progress.marks
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/duc/Documents/libftdi1-1.3_2/debug/CMakeFiles 0
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(CMAKE_COMMAND) -E cmake_progress_start /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug/CMakeFiles /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug/examples/CMakeFiles/progress.marks
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/clean
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/clean
 .PHONY : clean
 
 # The main clean target
@@ -163,22 +152,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/preinstall
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/preinstall
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 examples/CMakeFiles/eeprom.dir/rule:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/eeprom.dir/rule
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/eeprom.dir/rule
 .PHONY : examples/CMakeFiles/eeprom.dir/rule
 
 # Convenience name for target.
@@ -188,12 +177,12 @@ eeprom: examples/CMakeFiles/eeprom.dir/rule
 
 # fast build rule for target.
 eeprom/fast:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/eeprom.dir/build.make examples/CMakeFiles/eeprom.dir/build
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/eeprom.dir/build.make examples/CMakeFiles/eeprom.dir/build
 .PHONY : eeprom/fast
 
 # Convenience name for target.
 examples/CMakeFiles/stream_test.dir/rule:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/stream_test.dir/rule
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/stream_test.dir/rule
 .PHONY : examples/CMakeFiles/stream_test.dir/rule
 
 # Convenience name for target.
@@ -203,12 +192,12 @@ stream_test: examples/CMakeFiles/stream_test.dir/rule
 
 # fast build rule for target.
 stream_test/fast:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/stream_test.dir/build.make examples/CMakeFiles/stream_test.dir/build
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/stream_test.dir/build.make examples/CMakeFiles/stream_test.dir/build
 .PHONY : stream_test/fast
 
 # Convenience name for target.
 examples/CMakeFiles/baud_test.dir/rule:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/baud_test.dir/rule
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/baud_test.dir/rule
 .PHONY : examples/CMakeFiles/baud_test.dir/rule
 
 # Convenience name for target.
@@ -218,12 +207,12 @@ baud_test: examples/CMakeFiles/baud_test.dir/rule
 
 # fast build rule for target.
 baud_test/fast:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/baud_test.dir/build.make examples/CMakeFiles/baud_test.dir/build
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/baud_test.dir/build.make examples/CMakeFiles/baud_test.dir/build
 .PHONY : baud_test/fast
 
 # Convenience name for target.
 examples/CMakeFiles/find_all.dir/rule:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/find_all.dir/rule
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/find_all.dir/rule
 .PHONY : examples/CMakeFiles/find_all.dir/rule
 
 # Convenience name for target.
@@ -233,12 +222,12 @@ find_all: examples/CMakeFiles/find_all.dir/rule
 
 # fast build rule for target.
 find_all/fast:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/find_all.dir/build.make examples/CMakeFiles/find_all.dir/build
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/find_all.dir/build.make examples/CMakeFiles/find_all.dir/build
 .PHONY : find_all/fast
 
 # Convenience name for target.
 examples/CMakeFiles/bitbang_cbus.dir/rule:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/bitbang_cbus.dir/rule
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/bitbang_cbus.dir/rule
 .PHONY : examples/CMakeFiles/bitbang_cbus.dir/rule
 
 # Convenience name for target.
@@ -248,12 +237,12 @@ bitbang_cbus: examples/CMakeFiles/bitbang_cbus.dir/rule
 
 # fast build rule for target.
 bitbang_cbus/fast:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_cbus.dir/build.make examples/CMakeFiles/bitbang_cbus.dir/build
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_cbus.dir/build.make examples/CMakeFiles/bitbang_cbus.dir/build
 .PHONY : bitbang_cbus/fast
 
 # Convenience name for target.
 examples/CMakeFiles/bitbang_ft2232.dir/rule:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/bitbang_ft2232.dir/rule
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/bitbang_ft2232.dir/rule
 .PHONY : examples/CMakeFiles/bitbang_ft2232.dir/rule
 
 # Convenience name for target.
@@ -263,12 +252,12 @@ bitbang_ft2232: examples/CMakeFiles/bitbang_ft2232.dir/rule
 
 # fast build rule for target.
 bitbang_ft2232/fast:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_ft2232.dir/build.make examples/CMakeFiles/bitbang_ft2232.dir/build
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_ft2232.dir/build.make examples/CMakeFiles/bitbang_ft2232.dir/build
 .PHONY : bitbang_ft2232/fast
 
 # Convenience name for target.
 examples/CMakeFiles/bitbang2.dir/rule:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/bitbang2.dir/rule
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/bitbang2.dir/rule
 .PHONY : examples/CMakeFiles/bitbang2.dir/rule
 
 # Convenience name for target.
@@ -278,12 +267,12 @@ bitbang2: examples/CMakeFiles/bitbang2.dir/rule
 
 # fast build rule for target.
 bitbang2/fast:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang2.dir/build.make examples/CMakeFiles/bitbang2.dir/build
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang2.dir/build.make examples/CMakeFiles/bitbang2.dir/build
 .PHONY : bitbang2/fast
 
 # Convenience name for target.
 examples/CMakeFiles/client-mdb.dir/rule:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/client-mdb.dir/rule
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/client-mdb.dir/rule
 .PHONY : examples/CMakeFiles/client-mdb.dir/rule
 
 # Convenience name for target.
@@ -293,12 +282,12 @@ client-mdb: examples/CMakeFiles/client-mdb.dir/rule
 
 # fast build rule for target.
 client-mdb/fast:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/client-mdb.dir/build.make examples/CMakeFiles/client-mdb.dir/build
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/client-mdb.dir/build.make examples/CMakeFiles/client-mdb.dir/build
 .PHONY : client-mdb/fast
 
 # Convenience name for target.
 examples/CMakeFiles/bitbang.dir/rule:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/bitbang.dir/rule
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/bitbang.dir/rule
 .PHONY : examples/CMakeFiles/bitbang.dir/rule
 
 # Convenience name for target.
@@ -308,12 +297,12 @@ bitbang: examples/CMakeFiles/bitbang.dir/rule
 
 # fast build rule for target.
 bitbang/fast:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang.dir/build.make examples/CMakeFiles/bitbang.dir/build
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang.dir/build.make examples/CMakeFiles/bitbang.dir/build
 .PHONY : bitbang/fast
 
 # Convenience name for target.
 examples/CMakeFiles/serial_test.dir/rule:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/serial_test.dir/rule
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/serial_test.dir/rule
 .PHONY : examples/CMakeFiles/serial_test.dir/rule
 
 # Convenience name for target.
@@ -323,12 +312,12 @@ serial_test: examples/CMakeFiles/serial_test.dir/rule
 
 # fast build rule for target.
 serial_test/fast:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/serial_test.dir/build.make examples/CMakeFiles/serial_test.dir/build
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/serial_test.dir/build.make examples/CMakeFiles/serial_test.dir/build
 .PHONY : serial_test/fast
 
 # Convenience name for target.
 examples/CMakeFiles/simple.dir/rule:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/simple.dir/rule
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f CMakeFiles/Makefile2 examples/CMakeFiles/simple.dir/rule
 .PHONY : examples/CMakeFiles/simple.dir/rule
 
 # Convenience name for target.
@@ -338,7 +327,7 @@ simple: examples/CMakeFiles/simple.dir/rule
 
 # fast build rule for target.
 simple/fast:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/simple.dir/build.make examples/CMakeFiles/simple.dir/build
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/simple.dir/build.make examples/CMakeFiles/simple.dir/build
 .PHONY : simple/fast
 
 baud_test.o: baud_test.c.o
@@ -347,7 +336,7 @@ baud_test.o: baud_test.c.o
 
 # target to build an object file
 baud_test.c.o:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/baud_test.dir/build.make examples/CMakeFiles/baud_test.dir/baud_test.c.o
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/baud_test.dir/build.make examples/CMakeFiles/baud_test.dir/baud_test.c.o
 .PHONY : baud_test.c.o
 
 baud_test.i: baud_test.c.i
@@ -356,7 +345,7 @@ baud_test.i: baud_test.c.i
 
 # target to preprocess a source file
 baud_test.c.i:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/baud_test.dir/build.make examples/CMakeFiles/baud_test.dir/baud_test.c.i
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/baud_test.dir/build.make examples/CMakeFiles/baud_test.dir/baud_test.c.i
 .PHONY : baud_test.c.i
 
 baud_test.s: baud_test.c.s
@@ -365,7 +354,7 @@ baud_test.s: baud_test.c.s
 
 # target to generate assembly for a file
 baud_test.c.s:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/baud_test.dir/build.make examples/CMakeFiles/baud_test.dir/baud_test.c.s
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/baud_test.dir/build.make examples/CMakeFiles/baud_test.dir/baud_test.c.s
 .PHONY : baud_test.c.s
 
 bitbang.o: bitbang.c.o
@@ -374,7 +363,7 @@ bitbang.o: bitbang.c.o
 
 # target to build an object file
 bitbang.c.o:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang.dir/build.make examples/CMakeFiles/bitbang.dir/bitbang.c.o
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang.dir/build.make examples/CMakeFiles/bitbang.dir/bitbang.c.o
 .PHONY : bitbang.c.o
 
 bitbang.i: bitbang.c.i
@@ -383,7 +372,7 @@ bitbang.i: bitbang.c.i
 
 # target to preprocess a source file
 bitbang.c.i:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang.dir/build.make examples/CMakeFiles/bitbang.dir/bitbang.c.i
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang.dir/build.make examples/CMakeFiles/bitbang.dir/bitbang.c.i
 .PHONY : bitbang.c.i
 
 bitbang.s: bitbang.c.s
@@ -392,7 +381,7 @@ bitbang.s: bitbang.c.s
 
 # target to generate assembly for a file
 bitbang.c.s:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang.dir/build.make examples/CMakeFiles/bitbang.dir/bitbang.c.s
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang.dir/build.make examples/CMakeFiles/bitbang.dir/bitbang.c.s
 .PHONY : bitbang.c.s
 
 bitbang2.o: bitbang2.c.o
@@ -401,7 +390,7 @@ bitbang2.o: bitbang2.c.o
 
 # target to build an object file
 bitbang2.c.o:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang2.dir/build.make examples/CMakeFiles/bitbang2.dir/bitbang2.c.o
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang2.dir/build.make examples/CMakeFiles/bitbang2.dir/bitbang2.c.o
 .PHONY : bitbang2.c.o
 
 bitbang2.i: bitbang2.c.i
@@ -410,7 +399,7 @@ bitbang2.i: bitbang2.c.i
 
 # target to preprocess a source file
 bitbang2.c.i:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang2.dir/build.make examples/CMakeFiles/bitbang2.dir/bitbang2.c.i
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang2.dir/build.make examples/CMakeFiles/bitbang2.dir/bitbang2.c.i
 .PHONY : bitbang2.c.i
 
 bitbang2.s: bitbang2.c.s
@@ -419,7 +408,7 @@ bitbang2.s: bitbang2.c.s
 
 # target to generate assembly for a file
 bitbang2.c.s:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang2.dir/build.make examples/CMakeFiles/bitbang2.dir/bitbang2.c.s
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang2.dir/build.make examples/CMakeFiles/bitbang2.dir/bitbang2.c.s
 .PHONY : bitbang2.c.s
 
 bitbang_cbus.o: bitbang_cbus.c.o
@@ -428,7 +417,7 @@ bitbang_cbus.o: bitbang_cbus.c.o
 
 # target to build an object file
 bitbang_cbus.c.o:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_cbus.dir/build.make examples/CMakeFiles/bitbang_cbus.dir/bitbang_cbus.c.o
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_cbus.dir/build.make examples/CMakeFiles/bitbang_cbus.dir/bitbang_cbus.c.o
 .PHONY : bitbang_cbus.c.o
 
 bitbang_cbus.i: bitbang_cbus.c.i
@@ -437,7 +426,7 @@ bitbang_cbus.i: bitbang_cbus.c.i
 
 # target to preprocess a source file
 bitbang_cbus.c.i:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_cbus.dir/build.make examples/CMakeFiles/bitbang_cbus.dir/bitbang_cbus.c.i
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_cbus.dir/build.make examples/CMakeFiles/bitbang_cbus.dir/bitbang_cbus.c.i
 .PHONY : bitbang_cbus.c.i
 
 bitbang_cbus.s: bitbang_cbus.c.s
@@ -446,7 +435,7 @@ bitbang_cbus.s: bitbang_cbus.c.s
 
 # target to generate assembly for a file
 bitbang_cbus.c.s:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_cbus.dir/build.make examples/CMakeFiles/bitbang_cbus.dir/bitbang_cbus.c.s
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_cbus.dir/build.make examples/CMakeFiles/bitbang_cbus.dir/bitbang_cbus.c.s
 .PHONY : bitbang_cbus.c.s
 
 bitbang_ft2232.o: bitbang_ft2232.c.o
@@ -455,7 +444,7 @@ bitbang_ft2232.o: bitbang_ft2232.c.o
 
 # target to build an object file
 bitbang_ft2232.c.o:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_ft2232.dir/build.make examples/CMakeFiles/bitbang_ft2232.dir/bitbang_ft2232.c.o
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_ft2232.dir/build.make examples/CMakeFiles/bitbang_ft2232.dir/bitbang_ft2232.c.o
 .PHONY : bitbang_ft2232.c.o
 
 bitbang_ft2232.i: bitbang_ft2232.c.i
@@ -464,7 +453,7 @@ bitbang_ft2232.i: bitbang_ft2232.c.i
 
 # target to preprocess a source file
 bitbang_ft2232.c.i:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_ft2232.dir/build.make examples/CMakeFiles/bitbang_ft2232.dir/bitbang_ft2232.c.i
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_ft2232.dir/build.make examples/CMakeFiles/bitbang_ft2232.dir/bitbang_ft2232.c.i
 .PHONY : bitbang_ft2232.c.i
 
 bitbang_ft2232.s: bitbang_ft2232.c.s
@@ -473,7 +462,7 @@ bitbang_ft2232.s: bitbang_ft2232.c.s
 
 # target to generate assembly for a file
 bitbang_ft2232.c.s:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_ft2232.dir/build.make examples/CMakeFiles/bitbang_ft2232.dir/bitbang_ft2232.c.s
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/bitbang_ft2232.dir/build.make examples/CMakeFiles/bitbang_ft2232.dir/bitbang_ft2232.c.s
 .PHONY : bitbang_ft2232.c.s
 
 client-mdb.o: client-mdb.c.o
@@ -482,7 +471,7 @@ client-mdb.o: client-mdb.c.o
 
 # target to build an object file
 client-mdb.c.o:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/client-mdb.dir/build.make examples/CMakeFiles/client-mdb.dir/client-mdb.c.o
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/client-mdb.dir/build.make examples/CMakeFiles/client-mdb.dir/client-mdb.c.o
 .PHONY : client-mdb.c.o
 
 client-mdb.i: client-mdb.c.i
@@ -491,7 +480,7 @@ client-mdb.i: client-mdb.c.i
 
 # target to preprocess a source file
 client-mdb.c.i:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/client-mdb.dir/build.make examples/CMakeFiles/client-mdb.dir/client-mdb.c.i
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/client-mdb.dir/build.make examples/CMakeFiles/client-mdb.dir/client-mdb.c.i
 .PHONY : client-mdb.c.i
 
 client-mdb.s: client-mdb.c.s
@@ -500,7 +489,7 @@ client-mdb.s: client-mdb.c.s
 
 # target to generate assembly for a file
 client-mdb.c.s:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/client-mdb.dir/build.make examples/CMakeFiles/client-mdb.dir/client-mdb.c.s
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/client-mdb.dir/build.make examples/CMakeFiles/client-mdb.dir/client-mdb.c.s
 .PHONY : client-mdb.c.s
 
 eeprom.o: eeprom.c.o
@@ -509,7 +498,7 @@ eeprom.o: eeprom.c.o
 
 # target to build an object file
 eeprom.c.o:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/eeprom.dir/build.make examples/CMakeFiles/eeprom.dir/eeprom.c.o
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/eeprom.dir/build.make examples/CMakeFiles/eeprom.dir/eeprom.c.o
 .PHONY : eeprom.c.o
 
 eeprom.i: eeprom.c.i
@@ -518,7 +507,7 @@ eeprom.i: eeprom.c.i
 
 # target to preprocess a source file
 eeprom.c.i:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/eeprom.dir/build.make examples/CMakeFiles/eeprom.dir/eeprom.c.i
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/eeprom.dir/build.make examples/CMakeFiles/eeprom.dir/eeprom.c.i
 .PHONY : eeprom.c.i
 
 eeprom.s: eeprom.c.s
@@ -527,7 +516,7 @@ eeprom.s: eeprom.c.s
 
 # target to generate assembly for a file
 eeprom.c.s:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/eeprom.dir/build.make examples/CMakeFiles/eeprom.dir/eeprom.c.s
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/eeprom.dir/build.make examples/CMakeFiles/eeprom.dir/eeprom.c.s
 .PHONY : eeprom.c.s
 
 find_all.o: find_all.c.o
@@ -536,7 +525,7 @@ find_all.o: find_all.c.o
 
 # target to build an object file
 find_all.c.o:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/find_all.dir/build.make examples/CMakeFiles/find_all.dir/find_all.c.o
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/find_all.dir/build.make examples/CMakeFiles/find_all.dir/find_all.c.o
 .PHONY : find_all.c.o
 
 find_all.i: find_all.c.i
@@ -545,7 +534,7 @@ find_all.i: find_all.c.i
 
 # target to preprocess a source file
 find_all.c.i:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/find_all.dir/build.make examples/CMakeFiles/find_all.dir/find_all.c.i
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/find_all.dir/build.make examples/CMakeFiles/find_all.dir/find_all.c.i
 .PHONY : find_all.c.i
 
 find_all.s: find_all.c.s
@@ -554,7 +543,7 @@ find_all.s: find_all.c.s
 
 # target to generate assembly for a file
 find_all.c.s:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/find_all.dir/build.make examples/CMakeFiles/find_all.dir/find_all.c.s
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/find_all.dir/build.make examples/CMakeFiles/find_all.dir/find_all.c.s
 .PHONY : find_all.c.s
 
 serial_test.o: serial_test.c.o
@@ -563,7 +552,7 @@ serial_test.o: serial_test.c.o
 
 # target to build an object file
 serial_test.c.o:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/serial_test.dir/build.make examples/CMakeFiles/serial_test.dir/serial_test.c.o
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/serial_test.dir/build.make examples/CMakeFiles/serial_test.dir/serial_test.c.o
 .PHONY : serial_test.c.o
 
 serial_test.i: serial_test.c.i
@@ -572,7 +561,7 @@ serial_test.i: serial_test.c.i
 
 # target to preprocess a source file
 serial_test.c.i:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/serial_test.dir/build.make examples/CMakeFiles/serial_test.dir/serial_test.c.i
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/serial_test.dir/build.make examples/CMakeFiles/serial_test.dir/serial_test.c.i
 .PHONY : serial_test.c.i
 
 serial_test.s: serial_test.c.s
@@ -581,7 +570,7 @@ serial_test.s: serial_test.c.s
 
 # target to generate assembly for a file
 serial_test.c.s:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/serial_test.dir/build.make examples/CMakeFiles/serial_test.dir/serial_test.c.s
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/serial_test.dir/build.make examples/CMakeFiles/serial_test.dir/serial_test.c.s
 .PHONY : serial_test.c.s
 
 simple.o: simple.c.o
@@ -590,7 +579,7 @@ simple.o: simple.c.o
 
 # target to build an object file
 simple.c.o:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/simple.dir/build.make examples/CMakeFiles/simple.dir/simple.c.o
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/simple.dir/build.make examples/CMakeFiles/simple.dir/simple.c.o
 .PHONY : simple.c.o
 
 simple.i: simple.c.i
@@ -599,7 +588,7 @@ simple.i: simple.c.i
 
 # target to preprocess a source file
 simple.c.i:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/simple.dir/build.make examples/CMakeFiles/simple.dir/simple.c.i
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/simple.dir/build.make examples/CMakeFiles/simple.dir/simple.c.i
 .PHONY : simple.c.i
 
 simple.s: simple.c.s
@@ -608,7 +597,7 @@ simple.s: simple.c.s
 
 # target to generate assembly for a file
 simple.c.s:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/simple.dir/build.make examples/CMakeFiles/simple.dir/simple.c.s
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/simple.dir/build.make examples/CMakeFiles/simple.dir/simple.c.s
 .PHONY : simple.c.s
 
 stream_test.o: stream_test.c.o
@@ -617,7 +606,7 @@ stream_test.o: stream_test.c.o
 
 # target to build an object file
 stream_test.c.o:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/stream_test.dir/build.make examples/CMakeFiles/stream_test.dir/stream_test.c.o
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/stream_test.dir/build.make examples/CMakeFiles/stream_test.dir/stream_test.c.o
 .PHONY : stream_test.c.o
 
 stream_test.i: stream_test.c.i
@@ -626,7 +615,7 @@ stream_test.i: stream_test.c.i
 
 # target to preprocess a source file
 stream_test.c.i:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/stream_test.dir/build.make examples/CMakeFiles/stream_test.dir/stream_test.c.i
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/stream_test.dir/build.make examples/CMakeFiles/stream_test.dir/stream_test.c.i
 .PHONY : stream_test.c.i
 
 stream_test.s: stream_test.c.s
@@ -635,7 +624,7 @@ stream_test.s: stream_test.c.s
 
 # target to generate assembly for a file
 stream_test.c.s:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/stream_test.dir/build.make examples/CMakeFiles/stream_test.dir/stream_test.c.s
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(MAKE) -f examples/CMakeFiles/stream_test.dir/build.make examples/CMakeFiles/stream_test.dir/stream_test.c.s
 .PHONY : stream_test.c.s
 
 # Help Target
@@ -645,7 +634,6 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... install/strip"
 	@echo "... package"
 	@echo "... eeprom"
 	@echo "... stream_test"
@@ -707,6 +695,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/duc/Documents/libftdi1-1.3_2/debug && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/duc/Documents/Magma-Debug/libftdi1-1.3_2/debug && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

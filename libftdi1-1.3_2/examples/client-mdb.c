@@ -10,6 +10,7 @@
 #include <ftdi.h>
 #include <unistd.h>
 #include <string.h>
+#include <ctype.h>
 
 #define OK       0
 #define NO_INPUT 1
@@ -73,7 +74,87 @@ int getLine (char *prmpt, char *buff, size_t sz) {
     return OK;
 }
 
-int mdb_init(struct ftdi_context** ftdi_ptr)
+int mdb_read_state(struct ftdi_context* ftdi, unsigned char* buf, int size)
+{
+    int ret;
+    if ((ret = ftdi_setrts(ftdi, 0)) < 0)
+        fprintf(stderr, "unable to set rts to 0: %d (%s)\n", ret, ftdi_get_error_string(ftdi));
+    int bytesRead = ftdi_read_data(ftdi, buf, size);
+    if ((ret = ftdi_setrts(ftdi, 1)) < 0)
+        fprintf(stderr, "unable to set rts to 1: %d (%s)\n", ret, ftdi_get_error_string(ftdi));
+
+    return bytesRead;
+}
+
+void mdb_print_state(struct ftdi_context* ftdi, char** names, int numNames)
+{
+    unsigned char buf[200];
+    int bytesRead = mdb_read_state(ftdi, buf, 200);
+    while (bytesRead != 2) //TODO: READ THIS NUMBER FROM FILE.
+    {
+        bytesRead = mdb_read_state(ftdi, buf, 200);
+    }
+
+    //Printing results:
+    int nameInd = 0;
+    for (int i = 0; i < 8; i++)
+    {
+        char c = buf[i];
+        char byteString[20];
+        bin(c, byteString);
+        for (int j = 0; j < strlen(byteString); j++)
+        {
+            int currNameLen = strlen(names[nameInd]);
+            printf("%s:", names[nameInd]);
+            for (int k = 0; k < MAX_NAME_LENGTH - currNameLen; k++)
+                printf(" ");
+            printf("%c\n", byteString[j]);
+            nameInd++;
+            if (nameInd == numNames)
+            {
+                printf("\n");
+                return;
+            }
+        }
+    }
+}
+
+void mdb_print_name(struct ftdi_context* ftdi, char** names, int numNames, char* name)
+{
+    unsigned char buf[200];
+    int bytesRead = mdb_read_state(ftdi, buf, 200);
+    while (bytesRead != 2) //TODO: READ THIS NUMBER FROM FILE.
+    {
+        bytesRead = mdb_read_state(ftdi, buf, 200);
+    }
+
+    int nameInd = 0;
+    for (int i = 0; i < 8; i++)
+    {
+        char c = buf[i];
+        char byteString[20];
+        bin(c, byteString);
+        for (int j = 0; j < strlen(byteString); j++)
+        {
+            char *currName = names[nameInd];
+            if (strcmp(currName, name) == 0)
+            {
+                int currNameLen = strlen(currName);
+                printf("%s:", names[nameInd]);
+                for (int k = 0; k < MAX_NAME_LENGTH - currNameLen; k++)
+                    printf(" ");
+                printf("%c\n\n", byteString[j]);
+                return;
+            }
+            nameInd++;
+        }
+    }
+
+    printf("Name %s not found.\n\n", name);
+
+}
+
+int mdb_init(struct ftdi_context** ftdi_ptr, char** names, int numNames)
 {
     int ret;
     struct ftdi_context* ftdi;
@@ -108,15 +189,6 @@ int mdb_init(struct ftdi_context** ftdi_ptr)
     if ((ret = ftdi_setflowctrl(ftdi, SIO_RTS_CTS_HS)) < 0)
         fprintf(stderr, "unable to set flow control: %d (%s)\n", ret, ftdi_get_error_string(ftdi));
     *ftdi_ptr = ftdi;
-
-    // CLEAR UART
-    if ((ret = ftdi_setdtr_rts(ftdi, 1, 0)) < 0)
-        fprintf(stderr, "unable to reset UART: %d (%s)\n", ret, ftdi_get_error_string(ftdi));
-    if ((ret = ftdi_setdtr_rts(ftdi, 1, 1)) < 0)
-        fprintf(stderr, "unable to reset UART: %d (%s)\n", ret, ftdi_get_error_string(ftdi));
-    unsigned char buf[200];
-    ftdi_read_data(ftdi, buf, sizeof(buf));
-
     return 0;
 }
 
@@ -127,53 +199,6 @@ void mdb_advance_state(struct ftdi_context* ftdi)
         fprintf(stderr, "unable to set dtr to 0: %d (%s)\n", ret, ftdi_get_error_string(ftdi));
     if ((ret = ftdi_setdtr(ftdi, 1)) < 0)
         fprintf(stderr, "unable to set dtr to 1: %d (%s)\n", ret, ftdi_get_error_string(ftdi));
-}
-
-int mdb_read_state(struct ftdi_context* ftdi, unsigned char* buf, int size)
-{
-    int ret;
-    if ((ret = ftdi_setrts(ftdi, 0)) < 0)
-        fprintf(stderr, "unable to set rts to 0: %d (%s)\n", ret, ftdi_get_error_string(ftdi));
-    int bytesRead = ftdi_read_data(ftdi, buf, size);
-    if ((ret = ftdi_setrts(ftdi, 1)) < 0)
-        fprintf(stderr, "unable to set rts to 1: %d (%s)\n", ret, ftdi_get_error_string(ftdi));
-
-    return bytesRead;
-}
-
-void mdb_step(struct ftdi_context* ftdi, char** names, int numNames)
-{
-    mdb_advance_state(ftdi);
-
-    unsigned char buf[12];
-    int bytesRead = mdb_read_state(ftdi, buf, 11);
-    while (bytesRead != 2) //TODO: READ THIS NUMBER FROM FILE.
-    {
-        bytesRead = mdb_read_state(ftdi, buf, 11);
-    }
-
-    //Printing results:
-    int nameInd = 0;
-    for (int i = 0; i < 8; i++)
-    {
-        char c = buf[i];
-        char byteString[20];
-        bin(c, byteString);
-        for (int j = 0; j < strlen(byteString); j++)
-        {
-            int currNameLen = strlen(names[nameInd]);
-            printf("%s:", names[nameInd]);
-            for (int k = 0; k < MAX_NAME_LENGTH - currNameLen; k++)
-                printf(" ");
-            printf("%c\n", byteString[j]);
-            nameInd++;
-            if (nameInd == numNames)
-            {
-                printf("\n\n");
-                return;
-            }
-        }
-    }
 }
 
 int mdb_close(struct ftdi_context* ftdi)
@@ -228,31 +253,80 @@ void free_names(char** names, int numNames)
 int main(int argc, char *argv[])
 {
     struct ftdi_context* ftdi;
-    if (mdb_init(&ftdi) < 0)
-        return EXIT_FAILURE;
-    int counter = 0;
     char *names[MAX_BITS_TRACKED]; //todo: make this dynamically sized
     int numNames = read_names((char**)names);
-    for (int i = 0; i < numNames; i++)
-    {
-        printf("%s\n", names[i]);
-    }
-
+    if (mdb_init(&ftdi, names, numNames) < 0)
+        return EXIT_FAILURE;
+    int counter = 0;
+    
     while (1)
     {
         int rc;
-        char buff[10];
-
+        char buff[100];
         rc = getLine ("mdb -> ", buff, sizeof(buff));
 
-        if (strcmp(buff, "s") == 0 ||  strcmp(buff, "step") == 0)
+        if (strncmp(buff, "sp", 2) == 0)
         {
-            mdb_step(ftdi, names, numNames);
-            printf("\n");
+            mdb_advance_state(ftdi);
+            counter++;
+            printf("Advanced 1 clock cycle(s). Clock cycles since start: %d\n", counter);
+            mdb_print_state(ftdi, names, numNames);
         }
-        counter++;
+        else if (strncmp(buff, "step",4) == 0)
+        {
+            int numSteps = 0;
+            if (buff[4] == '\0')
+                numSteps = 1;
+            else if (buff[4] == ' ' && isdigit(buff[5]))
+                numSteps = atoi(buff+5);
+            counter += numSteps;
+            for (int i = 0; i < numSteps; i++)
+                mdb_advance_state(ftdi);
+
+            printf("Advanced %d clock cycle(s). Clock cycles since start: %d\n\n", numSteps, counter);
+        }
+        else if (strncmp(buff, "s",1) == 0)
+        {
+            int numSteps = 0;
+            
+            if (buff[1] == '\0')
+                numSteps = 1;
+            else if (buff[1] == ' ' && isdigit(buff[2]))
+                numSteps = atoi(buff+2);
+            counter += numSteps;
+            for (int i = 0; i < numSteps; i++)
+                mdb_advance_state(ftdi);
+
+            printf("Advanced %d clock cycle(s). Clock cycles since start: %d\n\n", numSteps, counter);
+        }
+        
+        else if (strncmp(buff, "print", 5) == 0)
+        {
+            if (buff[5] == '\0')
+                mdb_print_state(ftdi, names, numNames);
+            else if (buff[5] == ' ' && buff[6] != '\0')
+            {
+                char *name = &buff[6];
+                mdb_print_name(ftdi, names, numNames, name);
+            }
+        }
+        else if (strncmp(buff, "p", 1) == 0)
+        {
+            if (buff[1] == '\0')
+                mdb_print_state(ftdi, names, numNames);
+            else if (buff[1] == ' ' && buff[2] != '\0')
+            {
+                char *name = &buff[2];
+                mdb_print_name(ftdi, names, numNames, name);
+            }
+        }
     }
     mdb_close(ftdi);
     free_names((char**)names, numNames);
     return EXIT_SUCCESS;
 }
+
+
+
+
+
